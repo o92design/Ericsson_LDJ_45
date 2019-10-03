@@ -1,0 +1,17 @@
+{
+    "name": "Build",
+    "references": [
+        "GUID:3ee952f77f1fe384291e4979e99f7c8b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
