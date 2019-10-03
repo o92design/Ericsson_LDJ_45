@@ -7,7 +7,7 @@ using System;
 
 namespace editor
 {
-  public class Build
+  public class BuildSystem
   {
     private static ICommandLineInterface m_commandLineInstance = new CommandLineInterface();
 #if UNITY_EDITOR

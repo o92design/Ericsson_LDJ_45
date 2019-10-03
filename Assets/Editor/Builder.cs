@@ -6,6 +6,6 @@ public class Builder
   public static void CommandLineBuild()
   {
     Console.WriteLine("Performing a Command Line Build");
-    Build.CommandLineBuild();
+    BuildSystem.CommandLineBuild();
   }
 }
