@@ -10,13 +10,18 @@ public class SpawnSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_debugSpawnObject = Resources.Load("Prefabs/Default_cube", typeof(GameObject)) as GameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void DebugSpawn()
+    {
+        SpawnObject(m_debugSpawnObject);
     }
 
     public void SpawnObject(GameObject objectToSPawn)

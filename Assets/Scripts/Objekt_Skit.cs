@@ -27,6 +27,8 @@ public class Objekt_Skit : MonoBehaviour
             fixedJoint.anchor = contact.point;
             fixedJoint.connectedBody = hit.rigidbody;
         }
+        this.GetComponent<Rigidbody>().useGravity = false;
+        // Disable
         this.enabled = false;
     }
 }
