@@ -8,12 +8,21 @@ public class SpawnSystem : MonoBehaviour
     public GameObject m_SpawnPoint;
     public GameObject m_debugSpawnObject;
     public GameObject m_debugSpawnHuman;
+
+    public List<GameObject> m_prefabs;
+
     public int m_maxNumberOfStrössel = 20;
     // Start is called before the first frame update
     void Start()
     {
         m_debugSpawnObject = Resources.Load("Prefabs/Default_cube", typeof(GameObject)) as GameObject;
         m_debugSpawnHuman = Resources.Load("Prefabs/Human", typeof(GameObject)) as GameObject;
+        m_prefabs = new List<GameObject>();
+        m_prefabs.Add(Resources.Load("Prefabs/tree_001", typeof(GameObject)) as GameObject);
+        m_prefabs.Add(Resources.Load("Prefabs/tree_002", typeof(GameObject)) as GameObject);
+        m_prefabs.Add(Resources.Load("Prefabs/tree_003", typeof(GameObject)) as GameObject);
+        m_prefabs.Add(Resources.Load("Prefabs/pyramid_001", typeof(GameObject)) as GameObject);
+        m_prefabs.Add(Resources.Load("Prefabs/Human", typeof(GameObject)) as GameObject);
     }
 
     // Update is called once per frame
@@ -32,6 +41,11 @@ public class SpawnSystem : MonoBehaviour
         Strössla(m_debugSpawnHuman);
     }
 
+    public void DebugSpawnTrees(int i)
+    {
+        Strössla(m_prefabs[i]);
+    }
+
     public void Strössla(GameObject strössel)
     {
         for (int i = 0; i < Random.Range(2, m_maxNumberOfStrössel); i++)
@@ -42,6 +56,6 @@ public class SpawnSystem : MonoBehaviour
 
     public void SpawnObject(GameObject objectToSPawn, Vector3 pos)
     {
-        GameObject Object = Instantiate(objectToSPawn,pos, Quaternion.identity);
+        GameObject Object = Instantiate(objectToSPawn,pos, objectToSPawn.gameObject.transform.rotation);
     }
 }
