@@ -18,6 +18,9 @@ public class InitiateWorld : MonoBehaviour
             m_startGlow.SetActive(true);
             GetComponent<ParticleSystem>().Play();
             Camera.main.backgroundColor = new Color(0.2f, 0.2f, 0.2f);
+            Bloom bloomLayer = null;
+
+            // somewhere during initializing
         }
     }
 
@@ -29,18 +32,22 @@ public class InitiateWorld : MonoBehaviour
         {
             game.SetActive(true);
         }
-
-
-        Bloom bloomLayer = null;
-
-        // somewhere during initializing
-        PostProcessVolume volume = m_startGlow.GetComponentInChildren<PostProcessVolume>();
-        volume.profile.TryGetSettings<Bloom>(out bloomLayer);
-
-        bloomLayer.intensity.value = 20f;
-        bloomLayer.threshold.value = 20f;
-
+        PostProcessVolume volume = Camera.main.GetComponent<PostProcessVolume>();
+        volume.weight = 0.8f;
 
         m_startGlow.SetActive(false);
+        StartCoroutine("Light");
     }
+
+    IEnumerator Light()
+    {
+        PostProcessVolume volume = Camera.main.GetComponent<PostProcessVolume>();
+        while (volume.weight > 0)
+        {
+            volume.weight -= 0.001f;
+            yield return null;
+        }
+        Debug.Log("end");
+    }
+
 }
