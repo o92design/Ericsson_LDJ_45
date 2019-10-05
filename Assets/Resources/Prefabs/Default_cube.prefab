@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4122390996089080874}
   - component: {fileID: 4122390996089080875}
   - component: {fileID: 8494171883312894655}
+  - component: {fileID: 1678348366708301337}
   m_Layer: 0
   m_Name: Default_cube
   m_TagString: Untagged
@@ -102,7 +103,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4122390996089080876}
   serializedVersion: 2
-  m_Mass: 1000
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -120,5 +121,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7a31a890154c654eab4073515227f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1678348366708301337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4122390996089080876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9199a325ef3654947962ab81974a8fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
