@@ -73,7 +73,52 @@ namespace editor
 
       BuildPlayerOptions options = new BuildPlayerOptions();
       options.options = buildOptions;
-      options.scenes = providedScenes.Count > 0 ? providedScenes.ToArray() : GetLevelsFromBuildSettings();
+
+      // Get scenes from build settings or all scenes
+      if (providedScenes.Count <= 0)
+      {
+        string[] buildSettingsScenes = GetLevelsFromBuildSettings();
+        if(buildSettingsScenes.Length <= 0)
+        {
+          List<string> projectScenes = new List<string>();
+          var scenesDirPath = Application.dataPath + "/Scenes";
+          var scenesDirInfo = new DirectoryInfo(scenesDirPath);
+          var allScenesInfo = scenesDirInfo.GetFiles("*.unity", SearchOption.AllDirectories);
+
+          foreach(var sceneInfo in allScenesInfo)
+          { 
+            projectScenes.Add(sceneInfo.FullName);
+          }
+
+          Debug.Log("Chose to add all scenes: " + projectScenes.Count);
+
+          string scenesAdded = "";
+          foreach(string sceneName in projectScenes)
+          {
+            scenesAdded += sceneName + "\n";
+          }
+          Debug.Log(scenesAdded);
+
+          options.scenes = projectScenes.ToArray();
+        }
+        else
+        {
+          Debug.Log("Scenes from build settings added: " + buildSettingsScenes.Length);
+          string scenesAdded = "";
+          foreach (string sceneName in buildSettingsScenes)
+          {
+            scenesAdded += sceneName + "\n";
+          }
+          Debug.Log(scenesAdded);
+
+          options.scenes = buildSettingsScenes;
+        }
+      }
+      else
+      {
+        options.scenes = providedScenes.ToArray();
+      }
+
       options.locationPathName = providedLocationPath;
       options.target = providedTarget;
 
@@ -139,6 +184,8 @@ namespace editor
       // Check if all scene strings are correct else return false
       foreach (var scene in p_scenes)
       {
+        if (scene == "")
+          continue;
         if (!scene.EndsWith(".unity") || !File.Exists(scene))
         {
           // Create string of scenes that was sentin

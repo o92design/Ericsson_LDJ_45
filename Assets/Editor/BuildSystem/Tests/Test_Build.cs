@@ -17,7 +17,7 @@ namespace Tests
     public void Build_SetupTest()
     {
       Debug.Log(" ==== Performing Unit test of " + TestContext.CurrentContext.Test.Name + " ====");
-      Build.m_commandLine = Substitute.For<ICommandLineInterface>();
+      BuildSystem.m_commandLine = Substitute.For<ICommandLineInterface>();
       LogAssert.ignoreFailingMessages = false;
     }
 
@@ -45,7 +45,7 @@ namespace Tests
 
       Regex scenesRegex = new Regex(@"non-existing", RegexOptions.Multiline | RegexOptions.IgnoreCase);
       LogAssert.Expect(LogType.Error, scenesRegex);
-      Build.PerformBuild(options);
+      BuildSystem.PerformBuild(options);
     }
 
     [Test]
@@ -59,7 +59,7 @@ namespace Tests
 
       LogAssert.Expect(LogType.Log, new Regex(@"Succeeded", RegexOptions.IgnoreCase));
 
-      BuildSummary summary = Build.PerformBuild(options);
+      BuildSummary summary = BuildSystem.PerformBuild(options);
       Assert.AreEqual(summary.result, BuildResult.Succeeded);
     }
 
@@ -74,7 +74,7 @@ namespace Tests
 
       LogAssert.Expect(LogType.Error, new Regex(@"non-existing", RegexOptions.IgnoreCase));
 
-      BuildSummary summary = Build.PerformBuild(options);
+      BuildSummary summary = BuildSystem.PerformBuild(options);
       Assert.AreEqual(summary.result, BuildResult.Unknown, "Build method did not return a uninitialized BuildSummary");
     }
 
@@ -84,7 +84,7 @@ namespace Tests
       EditorBuildSettingsScene[] scenes = { new EditorBuildSettingsScene("Assets/Editor/Build/Tests/Scenes/BuildScene.unity", false) };
       EditorBuildSettings.scenes = scenes;
 
-      Assert.IsEmpty(Build.GetLevelsFromBuildSettings(), "Non-enabled scene was added to the buildsettings");
+      Assert.IsEmpty(BuildSystem.GetLevelsFromBuildSettings(), "Non-enabled scene was added to the buildsettings");
     }
 
     [Test]
@@ -93,7 +93,7 @@ namespace Tests
       EditorBuildSettingsScene[] scenes = { new EditorBuildSettingsScene("Assets/Editor/Build/Tests/Scenes/BuildScene.unity", true) };
       EditorBuildSettings.scenes = scenes;
 
-      BuildSummary summary = Build.Windows64Build();
+      BuildSummary summary = BuildSystem.Windows64Build();
       Assert.AreEqual(summary.result, BuildResult.Succeeded, "Did not succeed in building for Windows 64");
     }
 
@@ -105,10 +105,32 @@ namespace Tests
       string[] expectedArguments = new[] { "--DevBuild", "--Target Windows64", "--Path " + locationPath, "--Scenes " + scenes };
       BuildOptions options = BuildOptions.Development | BuildOptions.AllowDebugging;
 
-      Build.m_commandLine.GetCommandLineArgs().Returns(expectedArguments);
+      BuildSystem.m_commandLine.GetCommandLineArgs().Returns(expectedArguments);
 
-      BuildSummary summary = Build.CommandLineBuild();
-      Build.m_commandLine.Received().GetCommandLineArgs();
+      BuildSummary summary = BuildSystem.CommandLineBuild();
+      BuildSystem.m_commandLine.Received().GetCommandLineArgs();
+
+      Assert.AreEqual(BuildResult.Succeeded, summary.result, "Commandline build did not yield in succcess");
+      Assert.AreEqual(options, summary.options, "Did not return the correct BuildOptions");
+    }
+
+    [Test]
+    public void Build_Positive_PerformWithNoScenesSelected()
+    {
+      string locationPath = Path.Combine("Build/BuildEditorTest", Path.Combine(BuildTarget.StandaloneWindows64.ToString(), Application.productName + ".exe"));
+      string[] expectedArguments = new[] { "--DevBuild", "--Target Windows64", "--Path " + locationPath};
+      BuildOptions options = BuildOptions.Development | BuildOptions.AllowDebugging;
+
+      // This is for temporary remove any selected scenes in Editor build settings
+      EditorBuildSettingsScene[] tempSceneSettings = EditorBuildSettings.scenes;
+      EditorBuildSettings.scenes = null;
+
+      BuildSystem.m_commandLine.GetCommandLineArgs().Returns(expectedArguments);
+
+      BuildSummary summary = BuildSystem.CommandLineBuild();
+      BuildSystem.m_commandLine.Received().GetCommandLineArgs();
+
+      EditorBuildSettings.scenes = tempSceneSettings;
 
       Assert.AreEqual(BuildResult.Succeeded, summary.result, "Commandline build did not yield in succcess");
       Assert.AreEqual(options, summary.options, "Did not return the correct BuildOptions");
