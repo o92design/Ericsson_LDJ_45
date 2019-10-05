@@ -20,6 +20,9 @@ public class Objekt_Skit : MonoBehaviour
     {
         foreach (ContactPoint contact in hit.contacts)
         {
+
+            // Check for combinations??
+
             FixedJoint fixedJoint = gameObject.AddComponent<FixedJoint>();
             fixedJoint.anchor = contact.point;
             fixedJoint.connectedBody = hit.rigidbody;
