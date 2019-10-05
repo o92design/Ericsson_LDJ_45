@@ -24,5 +24,6 @@ public class Objekt_Skit : MonoBehaviour
             fixedJoint.anchor = contact.point;
             fixedJoint.connectedBody = hit.rigidbody;
         }
+        this.enabled = false;
     }
 }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlanetRotation : MonoBehaviour
 {
-    public float m_rotationalSpeed = 25f;
-    public float m_accelerationMultiplier = 10f;
+    public float m_rotationalSpeed = 10f;
+    public float m_accelerationMultiplier = 5f;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Acceleration",7f, 7f);
+        InvokeRepeating("Acceleration",5f, 5f);
     }
 
     // Update is called once per frame

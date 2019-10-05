@@ -783,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rotationalSpeed: 10
-  m_accelerationMultiplier: 20
+  m_accelerationMultiplier: 5
 --- !u!54 &880087786
 Rigidbody:
   m_ObjectHideFlags: 0
