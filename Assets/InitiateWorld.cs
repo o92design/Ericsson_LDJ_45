@@ -13,6 +13,7 @@ public class InitiateWorld : MonoBehaviour
 
     private void Update()
     {
+        Application.targetFrameRate = 60;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             m_startGlow.SetActive(true);
