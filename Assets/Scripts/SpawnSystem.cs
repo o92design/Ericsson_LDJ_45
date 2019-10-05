@@ -7,11 +7,13 @@ public class SpawnSystem : MonoBehaviour
 
     public GameObject m_SpawnPoint;
     public GameObject m_debugSpawnObject;
+    public GameObject m_debugSpawnHuman;
     public int m_maxNumberOfStrössel = 20;
     // Start is called before the first frame update
     void Start()
     {
         m_debugSpawnObject = Resources.Load("Prefabs/Default_cube", typeof(GameObject)) as GameObject;
+        m_debugSpawnHuman = Resources.Load("Prefabs/Human", typeof(GameObject)) as GameObject;
     }
 
     // Update is called once per frame
@@ -23,6 +25,11 @@ public class SpawnSystem : MonoBehaviour
     public void DebugSpawn()
     {
         Strössla(m_debugSpawnObject);
+    }
+
+    public void DebugSpawnHumans()
+    {
+        Strössla(m_debugSpawnHuman);
     }
 
     public void Strössla(GameObject strössel)
