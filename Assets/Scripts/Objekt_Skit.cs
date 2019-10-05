@@ -18,17 +18,35 @@ public class Objekt_Skit : MonoBehaviour
 
     void OnCollisionEnter(Collision hit)
     {
-        foreach (ContactPoint contact in hit.contacts)
+        if (hit.gameObject.CompareTag("Planet"))
         {
+            foreach (ContactPoint contact in hit.contacts)
+            {
 
-            // Check for combinations??
+                // Check for combinations??
 
-            FixedJoint fixedJoint = gameObject.AddComponent<FixedJoint>();
-            fixedJoint.anchor = contact.point;
-            fixedJoint.connectedBody = hit.rigidbody;
+                FixedJoint fixedJoint = gameObject.AddComponent<FixedJoint>();
+                fixedJoint.anchor = contact.point;
+                fixedJoint.connectedBody = hit.rigidbody;
+            }
+            this.GetComponent<Rigidbody>().useGravity = false;
+            // Disable
+            this.enabled = false;
+        }else if (hit.gameObject.GetComponent<FixedJoint>())
+        {
+            foreach (ContactPoint contact in hit.contacts)
+            {
+
+                // Check for combinations??
+
+                FixedJoint fixedJoint = gameObject.AddComponent<FixedJoint>();
+                fixedJoint.anchor = contact.point;
+                fixedJoint.connectedBody = hit.rigidbody;
+            }
+            this.GetComponent<Rigidbody>().useGravity = false;
+            // Disable
+            this.enabled = false;
         }
-        this.GetComponent<Rigidbody>().useGravity = false;
-        // Disable
-        this.enabled = false;
+
     }
 }

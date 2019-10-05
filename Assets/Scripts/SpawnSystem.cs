@@ -22,19 +22,19 @@ public class SpawnSystem : MonoBehaviour
 
     public void DebugSpawn()
     {
-        SpawnObject(m_debugSpawnObject);
+        Strössla(m_debugSpawnObject);
     }
 
     public void Strössla(GameObject strössel)
     {
         for (int i = 0; i < Random.Range(2, m_maxNumberOfStrössel); i++)
         {
-            SpawnObject(strössel);
+            SpawnObject(strössel, new Vector3(this.transform.position.x + Random.Range(-5,5), this.transform.position.y + Random.Range(-5, 5), this.transform.position.z + Random.Range(-5, 5)));
         }
     }
 
-    public void SpawnObject(GameObject objectToSPawn)
+    public void SpawnObject(GameObject objectToSPawn, Vector3 pos)
     {
-        GameObject Object = Instantiate(objectToSPawn,m_SpawnPoint.transform.position, Quaternion.identity);
+        GameObject Object = Instantiate(objectToSPawn,pos, Quaternion.identity);
     }
 }
