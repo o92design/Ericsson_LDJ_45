@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
 public class SpawnSystem : MonoBehaviour
 {
 
@@ -11,7 +12,14 @@ public class SpawnSystem : MonoBehaviour
 
     public List<GameObject> m_prefabs;
 
+    public TextMeshProUGUI m_slidervalue;
+    public Slider m_valueslider;
+    public TextMeshProUGUI m_slidervalue2;
+    public Slider m_valueslider2;
+
+
     public int m_maxNumberOfStrössel = 20;
+    public int m_minNumberOfStrössel = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +37,10 @@ public class SpawnSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        m_slidervalue.text = m_valueslider.value.ToString();
+        m_maxNumberOfStrössel = (int) m_valueslider.value;
+        m_slidervalue2.text = m_valueslider2.value.ToString();
+        m_minNumberOfStrössel = (int)m_valueslider2.value;
     }
 
     public void DebugSpawn()
@@ -49,7 +60,7 @@ public class SpawnSystem : MonoBehaviour
 
     public void Strössla(GameObject strössel)
     {
-        for (int i = 0; i < Random.Range(2, m_maxNumberOfStrössel); i++)
+        for (int i = 0; i < Random.Range(m_minNumberOfStrössel, m_maxNumberOfStrössel); i++)
         {
             SpawnObject(strössel, new Vector3(this.transform.position.x + Random.Range(-5,5), this.transform.position.y + Random.Range(-5, 5), this.transform.position.z + Random.Range(-5, 5)));
         }
@@ -58,5 +69,9 @@ public class SpawnSystem : MonoBehaviour
     public void SpawnObject(GameObject objectToSPawn, Vector3 pos)
     {
         GameObject Object = Instantiate(objectToSPawn,pos, objectToSPawn.gameObject.transform.rotation);
+
+        float scalemodifier = Random.Range(0.1f, 2);
+        Object.transform.rotation = Quaternion.Euler(new Vector3(Object.transform.eulerAngles.x, Random.Range(-180.0f, 180.0f), Object.transform.eulerAngles.z));
+        Object.transform.localScale = new Vector3(Object.transform.localScale.x * scalemodifier, Object.transform.localScale.y * scalemodifier, Object.transform.localScale.z * scalemodifier);
     }
 }
