@@ -7,10 +7,14 @@ public class ActionsUpdater : MonoBehaviour
   public Text m_EventText;
   public GameSteps m_gameSteps;
   public int m_flowStep = 0;
-
+ 
   public void UpdateAction(KeyCode p_key)
   {
-    PlayerActions action = m_gameSteps.m_eventActions[++m_flowStep];
+    // check if we're on exploration step now
+    if (m_flowStep >= m_gameSteps.m_playerActions.Length)
+      return;
+
+    PlayerActions action = m_gameSteps.m_playerActions[++m_flowStep];
     string actionText = action.m_action;
 
     if (m_flowStep != 0)
@@ -19,12 +23,23 @@ public class ActionsUpdater : MonoBehaviour
       actionText += ",";
 
     m_ActionText.text = actionText;
+    m_gameSteps.m_playerActions[m_flowStep].initializeAction();
     m_gameSteps.UpdateAction(m_flowStep, p_key, true);
   }
 
   public void UpdateEventText()
   {
-    m_EventText.text = "then " + m_gameSteps.m_eventActions[m_flowStep + 1].m_action.ToLower();
+    if(m_flowStep + 1 < m_gameSteps.m_playerActions.Length)
+    {
+      m_EventText.text = "then " + m_gameSteps.m_playerActions[m_flowStep + 1].m_action.ToLower();
+    }
+    else if(m_flowStep + 1 == m_gameSteps.m_playerActions.Length)
+    {
+      m_EventText.text = "then god must explore";
+      Debug.Log("We're on Exploration step");
+      Destroy(m_EventText.gameObject, 5);
+      Destroy(m_ActionText.gameObject, 5);
+    }
   }
 
   public void OnGUI()
@@ -33,13 +48,14 @@ public class ActionsUpdater : MonoBehaviour
 
     if(keyEvent.isKey)
     {
+
+      // Update next step
       if(m_flowStep == 0 ||
-        (keyEvent.keyCode != m_gameSteps.m_eventActions[m_flowStep].m_key && Input.GetKeyDown(keyEvent.keyCode)))
+        (!m_gameSteps.IsKeyMapped(keyEvent.keyCode) && Input.GetKeyDown(keyEvent.keyCode)))
       {
         UpdateAction(keyEvent.keyCode);
         UpdateEventText();
       }
     }
   }
-
 }

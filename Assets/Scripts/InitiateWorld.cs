@@ -15,18 +15,20 @@ public class InitiateWorld : MonoBehaviour
     private void Update()
     {
         Application.targetFrameRate = 60;
-        if (Input.GetKeyDown(KeyCode.Space) && !m_isWorldInitiated)
-        {
-            m_startGlow.SetActive(true);
-            GetComponent<ParticleSystem>().Play();
-            AudioManager.Instance.PlayBang();
-
-            // somewhere during initializing
-            m_isWorldInitiated = true;
-        }
     }
 
+    public void BigBang()
+    {
+        if (!m_isWorldInitiated)
+        {
+          m_startGlow.SetActive(true);
+          GetComponent<ParticleSystem>().Play();
+          AudioManager.Instance.PlayBang();
 
+          // somewhere during initializing
+          m_isWorldInitiated = true;
+        }
+    }
 
     public void OnParticleSystemStopped()
     {

@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1461,7 +1461,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.227125, y: 0.6794166}
   m_AnchorMax: {x: 0.7692188, y: 0.9722222}
-  m_AnchoredPosition: {x: -0.0025024414, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.0025024414, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: -0.000030518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &321495627
@@ -1754,7 +1754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -36, y: 153}
+  m_AnchoredPosition: {x: -174, y: 153}
   m_SizeDelta: {x: 1131.1, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &422059100
@@ -1793,7 +1793,7 @@ MonoBehaviour:
     m_Alignment: 3
     m_AlignByGeometry: 1
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: First nothing,
@@ -2205,7 +2205,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: then sound
+  m_Text: then god must explore
 --- !u!222 &606277948
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2230,8 +2230,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: -4}
-  m_SizeDelta: {x: 800, y: 348.6}
+  m_AnchoredPosition: {x: 68, y: -4}
+  m_SizeDelta: {x: 1411, y: 348.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &659048985
 GameObject:
@@ -2726,7 +2726,7 @@ GameObject:
   - component: {fileID: 801656887}
   - component: {fileID: 801656886}
   m_Layer: 0
-  m_Name: FlowStrings
+  m_Name: PlayerActions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2760,22 +2760,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d973e9214c65d4cad83702fd2146d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_eventActions:
+  m_playerActions:
   - m_action: First nothing
     m_key: 0
     m_available: 0
+    m_objectToSpawn: {fileID: 0}
+    m_spawnPosition: {fileID: 0}
   - m_action: Sound
     m_key: 0
     m_available: 0
+    m_objectToSpawn: {fileID: 0}
+    m_spawnPosition: {fileID: 0}
   - m_action: Light
     m_key: 0
     m_available: 0
-  - m_action: Dirt
+    m_objectToSpawn: {fileID: 988868748}
+    m_spawnPosition: {fileID: 971801901}
+  - m_action: Rock
     m_key: 0
     m_available: 0
+    m_objectToSpawn: {fileID: 5882232883801335743, guid: 84a221b632025544db0ad295341e5d6e,
+      type: 3}
+    m_spawnPosition: {fileID: 971801901}
   - m_action: Water
     m_key: 0
     m_available: 0
+    m_objectToSpawn: {fileID: 5289952225459053886, guid: 7f8718fbbdcf5404ebb26f33b608cb03,
+      type: 3}
+    m_spawnPosition: {fileID: 971801901}
+  - m_action: Exploration
+    m_key: 0
+    m_available: 0
+    m_objectToSpawn: {fileID: 3900119309971302936, guid: eedf2de2dfa8f0c4589e77e045838bfe,
+      type: 3}
+    m_spawnPosition: {fileID: 971801901}
 --- !u!4 &801656888
 Transform:
   m_ObjectHideFlags: 0
