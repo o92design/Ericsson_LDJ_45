@@ -69,8 +69,14 @@ public class InputManager : MonoBehaviour
         else return KeyCode.None;
     }
 
+    public string GetName(string functionName)
+    {
+        return string.Format("{0} of {1}", functionName, keyMap[functionName].ToString());
+    }
+
     void Update()
     {
+        // Example code for adding keys
         if(!keyMap.ContainsKey("left"))
         {
             MapFunction("left");
