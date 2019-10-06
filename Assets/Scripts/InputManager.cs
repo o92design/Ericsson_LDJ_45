@@ -6,11 +6,7 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance = null;
 
-    public KeyCode left;
-    public KeyCode right;
-    public KeyCode up;
-    public KeyCode down;
-
+    Dictionary<string, KeyCode> keyMap = new Dictionary<string, KeyCode>();
     List<KeyCode> m_keys = new List<KeyCode>();
 
     void Awake()
@@ -53,41 +49,43 @@ public class InputManager : MonoBehaviour
         m_keys.Add(KeyCode.X);
         m_keys.Add(KeyCode.Y);
         m_keys.Add(KeyCode.Z);
-
-        left = KeyCode.None;
-        right = KeyCode.None;
-        up = KeyCode.None;
-        down = KeyCode.None;
     }
 
-    void SetKey(ref KeyCode func)
+    public void MapFunction(string functionName)
     {
         foreach (KeyCode key in m_keys)
         {
             if (Input.GetKeyDown(key))
             {
-                func = key;
+                keyMap[functionName] = key;
             }
         }
     }
 
+    public KeyCode GetKey(string functionName)
+    {
+        if(keyMap.ContainsKey(functionName)) return keyMap[functionName];
+
+        else return KeyCode.None;
+    }
+
     void Update()
     {
-        if(left == KeyCode.None)
+        if(!keyMap.ContainsKey("left"))
         {
-            SetKey(ref left);
+            MapFunction("left");
         }
-        else if(down == KeyCode.None)
+        else if(!keyMap.ContainsKey("down"))
         {
-            SetKey(ref down);
+            MapFunction("down");
         }
-        else if(up == KeyCode.None)
+        else if(!keyMap.ContainsKey("up"))
         {
-            SetKey(ref up);
+            MapFunction("up");
         }
-        else if(right == KeyCode.None)
+        else if(!keyMap.ContainsKey("right"))
         {
-            SetKey(ref right);
+            MapFunction("right");
         }
     }
 }

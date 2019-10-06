@@ -19,19 +19,19 @@ public class PlanetRotation : MonoBehaviour
             m_rotation += new Vector3(Random.value/10, Random.value/10, Random.value/10);
 
 
-            if(Input.GetKey(InputManager.Instance.right))
+            if(Input.GetKey(InputManager.Instance.GetKey("right")))
             {
                 m_rotation += new Vector3(0.1f, 0, 0);
             }
-            if(Input.GetKey(InputManager.Instance.left))
+            if(Input.GetKey(InputManager.Instance.GetKey("left")))
             {
                 m_rotation += new Vector3(-0.1f, 0, 0);
             }
-            if(Input.GetKey(InputManager.Instance.up))
+            if(Input.GetKey(InputManager.Instance.GetKey("up")))
             {
                 m_rotation += new Vector3(0, 0.1f, 0);
             }
-            if(Input.GetKey(InputManager.Instance.down))
+            if(Input.GetKey(InputManager.Instance.GetKey("down")))
             {
                 m_rotation += new Vector3(0, -0.1f, 0);
             }
