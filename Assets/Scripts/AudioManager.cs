@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip m_mellow;
     public AudioClip m_bang;
     public AudioClip m_music;
+    public AudioClip m_ailien;
+    public AudioClip m_laser;
     // Components
     AudioListener m_audioListener;
     AudioSource m_audioSource;
@@ -37,6 +39,8 @@ public class AudioManager : MonoBehaviour
         m_mellow = Resources.Load<AudioClip>("Sound/mellow");
         m_bang = Resources.Load<AudioClip>("Sound/vortex");
         m_music = Resources.Load<AudioClip>("Sound/Music/bensound-betterdays");
+        m_ailien = Resources.Load<AudioClip>("Sound/ailien");
+        m_laser = Resources.Load<AudioClip>("Sound/laser");
         m_audioListener = GetComponent<AudioListener>();
         m_audioSource = GetComponent<AudioSource>();
 
@@ -63,6 +67,19 @@ public class AudioManager : MonoBehaviour
     {
         m_audioSource.PlayOneShot(m_bang);
     }
+
+    public void PlayAilien()
+    {
+
+        m_audioSource.PlayOneShot(m_ailien, 0.1f);
+    }
+
+    public void PlayLaser()
+    {
+        m_audioSource.PlayOneShot(m_laser, 0.1f);
+
+    }
+
 
     public void PlayBackgroundMellow()
     {
