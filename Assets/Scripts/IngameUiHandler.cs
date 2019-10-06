@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class IngameUiHandler : MonoBehaviour
 {
 
@@ -41,6 +41,13 @@ public class IngameUiHandler : MonoBehaviour
     public void ExitApplication()
     {
         Application.Quit();
+    }
+
+    public void ExitToMainMenu()
+    {
+        Destroy(Camera.main.gameObject);
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
 
 }
