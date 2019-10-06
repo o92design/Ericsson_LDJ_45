@@ -6,11 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Dev_Scenes/Oskar_dev_scene.unity
-    guid: 906bdcdb863ca2640831c07afa2e8d4a
+    path: Assets/Scenes/Dev_Scenes/Oskar_Main_Menu.unity
+    guid: cb5a98bdc8aa6ee4e8a1f0e12aaa1885
   - enabled: 1
     path: Assets/Scenes/Dev_Scenes/Andreas_dev_scene.unity
     guid: adc9ce180b1c122438b5353b3bdc5e73
+  - enabled: 1
+    path: Assets/Scenes/Dev_Scenes/Oskar_dev_scene.unity
+    guid: 906bdcdb863ca2640831c07afa2e8d4a
   - enabled: 1
     path: Assets/Scenes/Main_Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
