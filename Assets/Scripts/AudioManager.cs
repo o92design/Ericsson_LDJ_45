@@ -70,12 +70,14 @@ public class AudioManager : MonoBehaviour
 
     public void PlayAilien()
     {
-        m_audioSource.PlayOneShot(m_ailien);
+
+        m_audioSource.PlayOneShot(m_ailien, 0.1f);
     }
 
     public void PlayLaser()
     {
-        m_audioSource.PlayOneShot(m_laser);
+        m_audioSource.PlayOneShot(m_laser, 0.1f);
+
     }
 
 

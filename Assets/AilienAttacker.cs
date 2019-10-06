@@ -86,6 +86,7 @@ public class AilienAttacker : MonoBehaviour
     IEnumerator ResetLazer(LineRenderer lazer)
     {
         AudioManager.Instance.PlayLaser();
+        yield return new WaitForSeconds(0.1f);
         m_shooting = true;
         lineRenderer.enabled = true;
         yield return new WaitForSeconds(0.5f);
