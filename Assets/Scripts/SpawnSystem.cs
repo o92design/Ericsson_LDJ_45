@@ -22,6 +22,7 @@ public class SpawnSystem : MonoBehaviour
         m_prefabs.Add(Resources.Load("Prefabs/tree_002", typeof(GameObject)) as GameObject);
         m_prefabs.Add(Resources.Load("Prefabs/tree_003", typeof(GameObject)) as GameObject);
         m_prefabs.Add(Resources.Load("Prefabs/pyramid_001", typeof(GameObject)) as GameObject);
+        m_prefabs.Add(Resources.Load("Prefabs/rock_001", typeof(GameObject)) as GameObject);
         m_prefabs.Add(Resources.Load("Prefabs/Human", typeof(GameObject)) as GameObject);
     }
 
