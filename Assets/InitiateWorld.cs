@@ -8,20 +8,23 @@ public class InitiateWorld : MonoBehaviour
     public List<GameObject> m_world;
     public GameObject m_startGlow;
 
+    public bool m_isWorldInitiated = false;
 
 
 
     private void Update()
     {
         Application.targetFrameRate = 60;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !m_isWorldInitiated)
         {
             m_startGlow.SetActive(true);
             GetComponent<ParticleSystem>().Play();
+            AudioManager.Instance.PlayBoom();
             Camera.main.backgroundColor = new Color(0.2f, 0.2f, 0.2f);
             Bloom bloomLayer = null;
 
             // somewhere during initializing
+            m_isWorldInitiated = true;
         }
     }
 
@@ -49,6 +52,7 @@ public class InitiateWorld : MonoBehaviour
             yield return null;
         }
         Debug.Log("end");
+        AudioManager.Instance.PlayBackgroundMellow();
     }
 
 }
