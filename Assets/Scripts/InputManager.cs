@@ -23,6 +23,10 @@ public class InputManager : MonoBehaviour
             Instance = this;
         }
 
+        m_keys.Add(KeyCode.Return);
+        m_keys.Add(KeyCode.Tab);
+        m_keys.Add(KeyCode.Backspace);
+
         m_keys.Add(KeyCode.A);
         m_keys.Add(KeyCode.B);
         m_keys.Add(KeyCode.C);
@@ -49,6 +53,28 @@ public class InputManager : MonoBehaviour
         m_keys.Add(KeyCode.X);
         m_keys.Add(KeyCode.Y);
         m_keys.Add(KeyCode.Z);
+
+        m_keys.Add(KeyCode.Keypad0);
+        m_keys.Add(KeyCode.Keypad1);
+        m_keys.Add(KeyCode.Keypad2);
+        m_keys.Add(KeyCode.Keypad3);
+        m_keys.Add(KeyCode.Keypad4);
+        m_keys.Add(KeyCode.Keypad5);
+        m_keys.Add(KeyCode.Keypad6);
+        m_keys.Add(KeyCode.Keypad7);
+        m_keys.Add(KeyCode.Keypad8);
+        m_keys.Add(KeyCode.Keypad9);
+        m_keys.Add(KeyCode.KeypadPeriod);
+        m_keys.Add(KeyCode.KeypadDivide);
+        m_keys.Add(KeyCode.KeypadMultiply);
+        m_keys.Add(KeyCode.KeypadMinus);
+        m_keys.Add(KeyCode.KeypadPlus);
+        m_keys.Add(KeyCode.KeypadEnter);
+
+        m_keys.Add(KeyCode.UpArrow);
+        m_keys.Add(KeyCode.DownArrow);
+        m_keys.Add(KeyCode.RightArrow);
+        m_keys.Add(KeyCode.LeftArrow);
     }
 
     public void MapFunction(string functionName)
@@ -74,24 +100,13 @@ public class InputManager : MonoBehaviour
         return string.Format("{0} of {1}", functionName, keyMap[functionName].ToString());
     }
 
-    void Update()
+    public void ScrambleKeys()
     {
-        // Example code for adding keys
-        if(!keyMap.ContainsKey("left"))
+        Dictionary<string, KeyCode> newMap = new Dictionary<string, KeyCode>();
+        foreach(KeyValuePair<string, KeyCode> item in keyMap)
         {
-            MapFunction("left");
+            newMap[item.Key] = m_keys[Random.Range(0,m_keys.Count)];
         }
-        else if(!keyMap.ContainsKey("down"))
-        {
-            MapFunction("down");
-        }
-        else if(!keyMap.ContainsKey("up"))
-        {
-            MapFunction("up");
-        }
-        else if(!keyMap.ContainsKey("right"))
-        {
-            MapFunction("right");
-        }
+        keyMap = newMap;
     }
 }
