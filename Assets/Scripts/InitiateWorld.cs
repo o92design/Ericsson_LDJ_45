@@ -20,8 +20,6 @@ public class InitiateWorld : MonoBehaviour
             m_startGlow.SetActive(true);
             GetComponent<ParticleSystem>().Play();
             AudioManager.Instance.PlayBoom();
-            Camera.main.backgroundColor = new Color(0.2f, 0.2f, 0.2f);
-            Bloom bloomLayer = null;
 
             // somewhere during initializing
             m_isWorldInitiated = true;
@@ -40,6 +38,7 @@ public class InitiateWorld : MonoBehaviour
         volume.weight = 0.8f;
 
         m_startGlow.SetActive(false);
+        Camera.main.backgroundColor = new Color(0.2f, 0.2f, 0.2f);
         StartCoroutine("Light");
     }
 
