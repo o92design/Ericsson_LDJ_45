@@ -7,7 +7,7 @@ public class InitiateWorld : MonoBehaviour
 
     public List<GameObject> m_world;
     public GameObject m_startGlow;
-
+    public bool m_playingmusic = false; 
     public bool m_isWorldInitiated = false;
 
 
@@ -40,6 +40,10 @@ public class InitiateWorld : MonoBehaviour
         m_startGlow.SetActive(false);
         Camera.main.backgroundColor = new Color(0.2f, 0.2f, 0.2f);
         AudioManager.Instance.PlayBoom();
+        ScoreHandler.Instance.gameObject.GetComponent<Canvas>().enabled = true;
+        ScoreHandler.Instance.m_scoretext.alpha = 0;
+        ScoreHandler.Instance.m_score.alpha = 0;
+        ScoreHandler.Instance.m_modifier.alpha = 0;
         StartCoroutine("Light");
     }
 
@@ -49,10 +53,29 @@ public class InitiateWorld : MonoBehaviour
         while (volume.weight > 0)
         {
             volume.weight -= 0.001f;
+            if (volume.weight < 0.2 && !m_playingmusic)
+            {
+                m_playingmusic = true;
+                AudioManager.Instance.PlayBackgroundMusic();
+                StartCoroutine("Ui");
+            }
             yield return null;
         }
         Debug.Log("end");
-        AudioManager.Instance.PlayBackgroundMusic();
+    }
+
+    IEnumerator Ui()
+    {
+        while (ScoreHandler.Instance.m_scoretext.alpha < 1)
+        {
+            ScoreHandler.Instance.m_scoretext.alpha = ScoreHandler.Instance.m_scoretext.alpha + 0.001f;
+            ScoreHandler.Instance.m_modifier.alpha = ScoreHandler.Instance.m_modifier.alpha + 0.001f;
+            ScoreHandler.Instance.m_score.alpha = ScoreHandler.Instance.m_score.alpha + 0.001f;
+
+            
+            yield return null;
+        }
+        Debug.Log("fini"); 
     }
 
 }
