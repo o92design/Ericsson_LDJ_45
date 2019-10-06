@@ -19,7 +19,7 @@ public class InitiateWorld : MonoBehaviour
         {
             m_startGlow.SetActive(true);
             GetComponent<ParticleSystem>().Play();
-            AudioManager.Instance.PlayBoom();
+            AudioManager.Instance.PlayBang();
 
             // somewhere during initializing
             m_isWorldInitiated = true;
@@ -39,6 +39,7 @@ public class InitiateWorld : MonoBehaviour
 
         m_startGlow.SetActive(false);
         Camera.main.backgroundColor = new Color(0.2f, 0.2f, 0.2f);
+        AudioManager.Instance.PlayBoom();
         StartCoroutine("Light");
     }
 
@@ -51,7 +52,7 @@ public class InitiateWorld : MonoBehaviour
             yield return null;
         }
         Debug.Log("end");
-        AudioManager.Instance.PlayBackgroundMellow();
+        AudioManager.Instance.PlayBackgroundMusic();
     }
 
 }

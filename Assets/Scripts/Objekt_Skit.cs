@@ -28,7 +28,7 @@ public class Objekt_Skit : MonoBehaviour
                 FixedJoint fixedJoint = gameObject.AddComponent<FixedJoint>();
                 fixedJoint.anchor = contact.point;
                 fixedJoint.connectedBody = hit.rigidbody;
-                fixedJoint.breakForce = 1000;
+                fixedJoint.breakForce = 1500;
             }
             this.GetComponent<Rigidbody>().useGravity = false;
             this.transform.parent = hit.transform;
