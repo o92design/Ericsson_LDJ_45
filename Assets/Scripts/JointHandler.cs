@@ -20,12 +20,16 @@ public class JointHandler : MonoBehaviour
     {
         //Debug.Log("A joint has just been broken!, force: " + breakForce);
         this.transform.parent = null;
+        if (PlanetJointHandler.Instance.m_connected.Contains(this.gameObject))
+        {
+            PlanetJointHandler.Instance.m_connected.Remove(this.gameObject);
+        }
         Invoke("SelfDestruct",10);
     }
 
     void SelfDestruct()
     {
+        Destroy(this.gameObject);
 
-      Destroy(this.gameObject);
     }
 }
