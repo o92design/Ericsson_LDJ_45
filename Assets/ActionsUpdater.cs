@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class ActionsUpdater : MonoBehaviour
@@ -16,6 +17,11 @@ public class ActionsUpdater : MonoBehaviour
 
     PlayerActions action = m_gameSteps.m_playerActions[++m_flowStep];
     string actionText = action.m_action;
+
+    if (action.m_action.ToLower() == "sound")
+    {
+      GetComponent<PlayableDirector>().Play();
+    }
 
     if (m_flowStep != 0)
       actionText += " of " + p_key.ToString() + ",";

@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Playables;
 
 [Serializable]
 public struct PlayerActions
@@ -10,6 +12,7 @@ public struct PlayerActions
   public KeyCode m_key;
   public bool m_available;
   private SpawnSystem SpawnSystem;
+  public Text m_AvailText;
 
   public GameObject m_objectToSpawn;
   public GameObject m_spawnPosition;
@@ -27,7 +30,7 @@ public struct PlayerActions
     if (m_objectToSpawn == null)
       return;
 
-    if (m_action.ToLower() == "light")
+     if (m_action.ToLower() == "light")
     {
       m_objectToSpawn.GetComponent<InitiateWorld>().BigBang();
     }
@@ -46,7 +49,13 @@ public class GameSteps : MonoBehaviour
   {
     m_playerActions[p_index].m_key = p_key;
     m_playerActions[p_index].m_available = p_available;
-    m_playerActions[p_index].Spawn();
+    
+    if(m_playerActions[p_index].m_available)
+    {
+      m_playerActions[p_index].m_AvailText.text = m_playerActions[p_index].m_action + " of " + m_playerActions[p_index].m_key;
+      m_playerActions[p_index].m_AvailText.enabled = p_available;
+      m_playerActions[p_index].Spawn();
+    }
   }
 
   public bool IsKeyMapped(KeyCode p_key)

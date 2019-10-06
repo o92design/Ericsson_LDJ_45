@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Rendering.PostProcessing;
 public class InitiateWorld : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class InitiateWorld : MonoBehaviour
           m_startGlow.SetActive(true);
           GetComponent<ParticleSystem>().Play();
           AudioManager.Instance.PlayBang();
+          GetComponent<PlayableDirector>().Play();
 
           // somewhere during initializing
           m_isWorldInitiated = true;
@@ -58,7 +60,7 @@ public class InitiateWorld : MonoBehaviour
             if (volume.weight < 0.2 && !m_playingmusic)
             {
                 m_playingmusic = true;
-                AudioManager.Instance.PlayBackgroundMusic();
+                //AudioManager.Instance.PlayBackgroundMusic();
                 StartCoroutine("Ui");
             }
             yield return null;
