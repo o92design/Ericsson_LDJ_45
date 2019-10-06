@@ -19,6 +19,10 @@ public class Sluka : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //Debug.Log("Destroying " + collision.gameObject.name);
+        if (PlanetJointHandler.Instance.m_connected.Contains(collision.gameObject))
+        {
+            PlanetJointHandler.Instance.m_connected.Remove(collision.gameObject);
+        }
         Destroy(collision.gameObject);
     }
 }
