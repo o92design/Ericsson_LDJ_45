@@ -67,7 +67,7 @@ public class InitiateWorld : MonoBehaviour
             if (volume.weight < 0.2 && !m_playingmusic)
             {
                 m_playingmusic = true;
-                AudioManager.Instance.PlayBackgroundMusic();
+                //AudioManager.Instance.PlayBackgroundMusic();
                 StartCoroutine("Ui");
             }
             yield return null;
