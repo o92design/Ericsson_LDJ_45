@@ -51,8 +51,8 @@ public class ActionsUpdater : MonoBehaviour
     {
       m_EventText.text = "then god must explore";
       Debug.Log("We're on Exploration step");
-      Destroy(m_EventText.gameObject, 5);
-      Destroy(m_ActionText.gameObject, 5);
+      Destroy(m_EventText.gameObject, 12);
+      Destroy(m_ActionText.gameObject, 12);
     }
   }
 
