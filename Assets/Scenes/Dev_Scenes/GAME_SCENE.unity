@@ -2981,6 +2981,8 @@ MonoBehaviour:
   m_EventText: {fileID: 606277947}
   m_gameSteps: {fileID: 801656887}
   m_flowStep: 0
+  m_inputWaitingTime: 7.5
+  m_canInput: 1
 --- !u!114 &801656887
 MonoBehaviour:
   m_ObjectHideFlags: 0
