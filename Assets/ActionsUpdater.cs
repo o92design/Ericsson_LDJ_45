@@ -12,6 +12,13 @@ public class ActionsUpdater : MonoBehaviour
   [Range(0, 30)]
   public float m_inputWaitingTime = 5;
   public bool m_canInput;
+  public float m_InputTimeAfterAfterFadeInAnimation = 5;
+  public float m_bigBangTextDelay;
+
+  public void Start()
+  {
+    StartCoroutine(FadeInStartingText(m_InputTimeAfterAfterFadeInAnimation));
+  }
 
   public void UpdateAction(KeyCode p_key)
   {
@@ -21,11 +28,6 @@ public class ActionsUpdater : MonoBehaviour
 
     PlayerActions action = m_gameSteps.m_playerActions[++m_flowStep];
     string actionText = action.m_action;
-
-    if (action.m_action.ToLower() == "sound")
-    {
-      GetComponent<PlayableDirector>().Play();
-    }
 
     if (m_flowStep != 0)
       actionText += " of " + p_key.ToString() + ",";
@@ -52,6 +54,8 @@ public class ActionsUpdater : MonoBehaviour
     }
   }
 
+
+  // This handles our Step updates
   public void OnGUI()
   {
     Event keyEvent = Event.current;
@@ -62,20 +66,52 @@ public class ActionsUpdater : MonoBehaviour
       if (m_flowStep == 0 ||
         (!m_gameSteps.IsKeyMapped(keyEvent.keyCode) && Input.GetKeyDown(keyEvent.keyCode)))
       {
-        StartCoroutine(WaitForSomeTime(keyEvent.keyCode, m_inputWaitingTime));
+        if (m_flowStep == 0)
+        {
+          GetComponent<PlayableDirector>().Play();
+        }
+
+        StartCoroutine(UpdateText(keyEvent.keyCode, m_inputWaitingTime));
       }
     }
   }
 
-  IEnumerator WaitForSomeTime(KeyCode p_keyCode, float p_seconds)
+  IEnumerator UpdateText(KeyCode p_keyCode, float p_seconds)
   {
+    m_ActionText.gameObject.GetComponent<Animation>().Play("TextAnimation_FadeOut");
+    m_EventText.gameObject.GetComponent<Animation>().Play("TextAnimation_FadeOut");
     m_canInput = false;
+
+    float secondsMultiplyer = 0;
+
+    yield return new WaitForSeconds(p_seconds);
     UpdateAction(p_keyCode);
     UpdateEventText();
 
-    yield return new WaitForSeconds(p_seconds);
+    if (m_flowStep == 2)
+    {
+      secondsMultiplyer += m_bigBangTextDelay;
+    }
 
+    yield return new WaitForSeconds(p_seconds + secondsMultiplyer);
+    m_ActionText.gameObject.GetComponent<Animation>().Play("TextAnimation_FadeIn");
+    m_EventText.gameObject.GetComponent<Animation>().Play("TextAnimation_FadeIn");
+
+    m_gameSteps.m_playerActions[m_flowStep].m_AvailText.gameObject.GetComponent<Animation>().Play();
+
+    yield return new WaitForSeconds(2);
     Debug.Log("Now we can input again!");
+
+    m_canInput = true;
+  }
+
+  IEnumerator FadeInStartingText(float p_seconds)
+  {
+    m_canInput = false;
+    m_ActionText.gameObject.GetComponent<Animation>().Play("TextAnimation_FadeIn");
+    m_EventText.gameObject.GetComponent<Animation>().Play("TextAnimation_FadeIn");
+
+    yield return new WaitForSeconds(p_seconds);
     m_canInput = true;
   }
 }
