@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Rendering.PostProcessing;
 public class InitiateWorld : MonoBehaviour
 {
@@ -15,18 +16,21 @@ public class InitiateWorld : MonoBehaviour
     private void Update()
     {
         Application.targetFrameRate = 60;
-        if (Input.GetKeyDown(KeyCode.Space) && !m_isWorldInitiated)
-        {
-            m_startGlow.SetActive(true);
-            GetComponent<ParticleSystem>().Play();
-            AudioManager.Instance.PlayBang();
-
-            // somewhere during initializing
-            m_isWorldInitiated = true;
-        }
     }
 
+    public void BigBang()
+    {
+        if (!m_isWorldInitiated)
+        {
+          m_startGlow.SetActive(true);
+          GetComponent<ParticleSystem>().Play();
+          AudioManager.Instance.PlayBang();
+          GetComponent<PlayableDirector>().Play();
 
+          // somewhere during initializing
+          m_isWorldInitiated = true;
+        }
+    }
 
     public void OnParticleSystemStopped()
     {
@@ -56,7 +60,7 @@ public class InitiateWorld : MonoBehaviour
             if (volume.weight < 0.2 && !m_playingmusic)
             {
                 m_playingmusic = true;
-                AudioManager.Instance.PlayBackgroundMusic();
+                //AudioManager.Instance.PlayBackgroundMusic();
                 StartCoroutine("Ui");
             }
             yield return null;
