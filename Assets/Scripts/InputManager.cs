@@ -84,7 +84,6 @@ public class InputManager : MonoBehaviour
             if (Input.GetKeyDown(key))
             {
                 keyMap[functionName] = key;
-                Debug.Log("MAPPED " + functionName + " to " + keyMap[functionName]);
             }
         }
     }
