@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc52a8cfa444239488205647f4083799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_nextSceneName: Oskar_game_scene
+  m_nextSceneName: Andreas_dev_scene
 --- !u!4 &233865036
 Transform:
   m_ObjectHideFlags: 0
