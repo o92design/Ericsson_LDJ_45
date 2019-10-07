@@ -15,7 +15,7 @@ public class InitiateWorld : MonoBehaviour
     private void Update()
     {
         Application.targetFrameRate = 60;
-        if (Input.GetKeyDown(KeyCode.Space) && !m_isWorldInitiated)
+        if (Input.GetKeyDown(KeyCode.F9) && !m_isWorldInitiated)
         {
             m_startGlow.SetActive(true);
             GetComponent<ParticleSystem>().Play();
