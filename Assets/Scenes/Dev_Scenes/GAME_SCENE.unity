@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2796,7 +2796,7 @@ GameObject:
   - component: {fileID: 730697110}
   - component: {fileID: 730697112}
   m_Layer: 5
-  m_Name: Human_Avail
+  m_Name: Vegetation_Avail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3068,10 +3068,10 @@ MonoBehaviour:
   m_EventText: {fileID: 606277947}
   m_gameSteps: {fileID: 801656887}
   m_flowStep: 0
-  m_inputWaitingTime: 5
+  m_inputWaitingTime: 3.45
   m_canInput: 0
-  m_InputTimeAfterAfterFadeInAnimation: 5
-  m_bigBangTextDelay: 12
+  m_InputTimeAfterAfterFadeInAnimation: 4
+  m_bigBangTextDelay: 15
 --- !u!114 &801656887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3117,11 +3117,11 @@ MonoBehaviour:
     m_objectToSpawn: {fileID: 5289952225459053886, guid: 7f8718fbbdcf5404ebb26f33b608cb03,
       type: 3}
     m_spawnPosition: {fileID: 971801901}
-  - m_action: Exploration
+  - m_action: Vegetation
     m_key: 0
     m_available: 0
     m_AvailText: {fileID: 730697110}
-    m_objectToSpawn: {fileID: 3900119309971302936, guid: eedf2de2dfa8f0c4589e77e045838bfe,
+    m_objectToSpawn: {fileID: 364507665304501468, guid: f8f2d75c603adfa489bd836c5beed504,
       type: 3}
     m_spawnPosition: {fileID: 971801901}
 --- !u!4 &801656888

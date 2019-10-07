@@ -36,7 +36,7 @@ public struct PlayerActions
     }
     else
     {
-      SpawnSystem.SpawnObject(m_objectToSpawn, m_spawnPosition.transform.position);
+      SpawnSystem.Strössla(m_objectToSpawn);
     }
   }
 }
