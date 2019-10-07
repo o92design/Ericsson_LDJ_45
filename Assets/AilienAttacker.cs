@@ -148,6 +148,7 @@ public class AilienAttacker : MonoBehaviour
                 m_firetarget.transform.localScale = Vector3.zero;
                 AudioManager.Instance.PlayBoom();
                 m_exploded = true;
+                GameOver.Instance.TriggerGameOver();
             }
         }
         else

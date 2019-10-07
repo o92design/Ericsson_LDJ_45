@@ -10,13 +10,14 @@ public class AilienSpawner : MonoBehaviour
     public GameObject m_start;
     public GameObject m_end;
     public GameObject m_ailienPrefab;
+    int number_of_spawns = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         m_start = Instantiate(m_spawnplace, new Vector3(this.transform.position.x - 100, this.transform.position.x, this.transform.position.x), Quaternion.identity);
         m_end = Instantiate(m_endtarget, new Vector3(this.transform.position.x + 100, this.transform.position.x, this.transform.position.x), Quaternion.identity);
-        InvokeRepeating("SpawnAilienEvent",120,60);
+        InvokeRepeating("SpawnAilienEvent",60,60);
     }
 
     // Update is called once per frame
@@ -30,9 +31,18 @@ public class AilienSpawner : MonoBehaviour
 
     public void SpawnAilienEvent()
     {
-       GameObject ailien =  Instantiate(m_ailienPrefab, m_start.transform.position, Quaternion.identity);
+        number_of_spawns++;
+
+        for (int i = 0; i< number_of_spawns; i++)
+        {
+            Invoke("Spawn", i * 5);
+        }
+    }
+
+    public void Spawn()
+    {
+        GameObject ailien = Instantiate(m_ailienPrefab, m_start.transform.position, Quaternion.identity);
         ailien.GetComponent<AilienAttacker>().m_starttarget = this.gameObject;
         ailien.GetComponent<AilienAttacker>().m_endTarget = m_end;
-
     }
 }
