@@ -7,11 +7,12 @@ public class AilienAttacker : MonoBehaviour
     public LineRenderer lineRenderer;
     public GameObject m_endTarget;
     public GameObject m_starttarget;
+    public GameObject m_firetarget;
     public float speed = 1;
     private float time = 0f;
     private float time2 = 0f;
     float interpolationPeriod = 30f;
-    float interpolationPeriod2 = 0.5f;
+    float interpolationPeriod2 = 3f;
     public bool rotate = false;
     public bool move_to_end = false;
     public Vector3 desiredPosition;
@@ -28,7 +29,7 @@ public class AilienAttacker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
 
         if (transform.position.x >= m_starttarget.transform.position.x -10 && !rotate)
         {
@@ -67,13 +68,36 @@ public class AilienAttacker : MonoBehaviour
             desiredPosition = (transform.position - m_starttarget.transform.position).normalized * radius + m_starttarget.transform.position ;
             transform.position = Vector3.MoveTowards(transform.position, desiredPosition, radiusSpeed * Time.deltaTime);
 
-            lineRenderer.SetPosition(0, this.gameObject.transform.position);
-            lineRenderer.SetPosition(1, m_starttarget.transform.position);
 
-            if (time2 > interpolationPeriod2)
+            if (m_firetarget == null && !m_shooting)
             {
-                StartCoroutine(ResetLazer(lineRenderer));
+                float distance = 0;
+                foreach (GameObject game in PlanetJointHandler.Instance.m_connected)
+                {
+                    if(game != null)
+                    {
+                        if (Vector3.Distance(this.transform.position, game.transform.position) < distance || distance == 0)
+                        {
+                            distance = Vector3.Distance(this.transform.position, game.transform.position);
+                            m_firetarget = game;
+                        }
+                    }
+                }
             }
+
+
+            if (m_firetarget != null)
+            {
+                lineRenderer.SetPosition(0, this.gameObject.transform.position);
+                lineRenderer.SetPosition(1, m_firetarget.transform.position);
+
+                if (time2 > interpolationPeriod2)
+                {
+                    StartCoroutine(ResetLazer(lineRenderer));
+                    time2 = 0;
+                }
+            }
+
 
 
             yield return null;
@@ -91,8 +115,9 @@ public class AilienAttacker : MonoBehaviour
         lineRenderer.enabled = true;
         yield return new WaitForSeconds(0.5f);
         lazer.enabled = false;
+        PlanetJointHandler.Instance.m_connected.Remove(m_firetarget);
+        Destroy(m_firetarget);
         m_shooting = false;
-        time2 = 0;
     }
 
 
