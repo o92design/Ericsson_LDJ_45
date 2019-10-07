@@ -141,8 +141,9 @@ public class AilienAttacker : MonoBehaviour
                     obj.GetComponent<Rigidbody>().useGravity = false;
                     obj.transform.localScale = Random.Range(1, 7) * obj.transform.localScale;
                     transform.rotation = Random.rotation;
-                    obj.GetComponent<Rigidbody>().velocity = -Random.rotation.eulerAngles / 15;
-                    obj.GetComponent<Rigidbody>().AddTorque(obj.transform.up * 10);
+                    obj.GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
+                    obj.GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f)));
+                    obj.GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f)));
                 }
                 // destroy bam
                 m_firetarget.transform.localScale = Vector3.zero;
