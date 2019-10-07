@@ -35,7 +35,7 @@ public class AilienSpawner : MonoBehaviour
 
         for (int i = 0; i< number_of_spawns; i++)
         {
-            Invoke("Spawn", i * 5);
+            Invoke("Spawn", i * 2);
         }
     }
 
