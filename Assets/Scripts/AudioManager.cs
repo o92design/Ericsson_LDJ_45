@@ -48,8 +48,7 @@ public class AudioManager : MonoBehaviour
 
 
         // Init
-        m_audioSource.PlayOneShot(m_blip);
-        
+        //m_audioSource.PlayOneShot(m_blip);
     }
 
 
