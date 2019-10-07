@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 
@@ -24,6 +25,8 @@ public class ActionsUpdater : MonoBehaviour
     // check if we're on exploration step now
     if (m_flowStep >= m_gameSteps.m_playerActions.Length)
       return;
+
+    Debug.Log("Updating the step to " + m_flowStep + 1);
 
     PlayerActions action = m_gameSteps.m_playerActions[++m_flowStep];
     string actionText = action.m_action;
@@ -62,16 +65,20 @@ public class ActionsUpdater : MonoBehaviour
     if(keyEvent.isKey)
     {
 
-      // Update next step
-      if(m_flowStep == 0 ||
-        (!m_gameSteps.IsKeyMapped(keyEvent.keyCode) && Input.GetKeyDown(keyEvent.keyCode)))
+      if(m_canInput)
       {
-        if (m_flowStep == 0)
+        // Update next step
+        if (m_flowStep == 0 ||
+          (!m_gameSteps.IsKeyMapped(keyEvent.keyCode) && Input.GetKeyDown(keyEvent.keyCode)))
         {
-          GetComponent<PlayableDirector>().Play();
-        }
+          Debug.Log("Will update step since a new key is pressed");
+          if (m_flowStep == 0)
+          {
+            GetComponent<PlayableDirector>().Play();
+          }
 
-        StartCoroutine(UpdateText(keyEvent.keyCode, m_inputWaitingTime));
+          StartCoroutine(UpdateText(keyEvent.keyCode, m_inputWaitingTime));
+        }
       }
     }
   }
@@ -85,6 +92,9 @@ public class ActionsUpdater : MonoBehaviour
     float secondsMultiplyer = 0;
 
     yield return new WaitForSeconds(p_seconds);
+
+    Debug.Log("We will update our acion once now");
+
     UpdateAction(p_keyCode);
     UpdateEventText();
 
@@ -97,7 +107,7 @@ public class ActionsUpdater : MonoBehaviour
     m_ActionText.gameObject.GetComponent<Animation>().Play("TextAnimation_FadeIn");
     m_EventText.gameObject.GetComponent<Animation>().Play("TextAnimation_FadeIn");
 
-    m_gameSteps.m_playerActions[m_flowStep].m_AvailText.gameObject.GetComponent<Animation>().Play();
+    m_gameSteps.m_playerActions[m_flowStep].m_AvailText.gameObject.GetComponent<Animation>().Play("TextAnimation_FadeIn");
 
     yield return new WaitForSeconds(2);
     Debug.Log("Now we can input again!");
