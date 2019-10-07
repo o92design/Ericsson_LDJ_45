@@ -26,7 +26,18 @@ public class InitiateWorld : MonoBehaviour
         }
     }
 
+    public void BigBang()
+    {
+        if (!m_isWorldInitiated)
+        {
+          m_startGlow.SetActive(true);
+          GetComponent<ParticleSystem>().Play();
+          AudioManager.Instance.PlayBang();
 
+          // somewhere during initializing
+          m_isWorldInitiated = true;
+        }
+  }
 
     public void OnParticleSystemStopped()
     {
