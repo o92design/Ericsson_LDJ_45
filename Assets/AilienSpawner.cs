@@ -17,7 +17,7 @@ public class AilienSpawner : MonoBehaviour
     {
         m_start = Instantiate(m_spawnplace, new Vector3(this.transform.position.x - 100, this.transform.position.x, this.transform.position.x), Quaternion.identity);
         m_end = Instantiate(m_endtarget, new Vector3(this.transform.position.x + 100, this.transform.position.x, this.transform.position.x), Quaternion.identity);
-        InvokeRepeating("SpawnAilienEvent",60,30);
+        InvokeRepeating("SpawnAilienEvent",60,15);
     }
 
     // Update is called once per frame
@@ -31,6 +31,7 @@ public class AilienSpawner : MonoBehaviour
 
     public void SpawnAilienEvent()
     {
+        number_of_spawns++;
         number_of_spawns++;
 
         for (int i = 0; i< number_of_spawns; i++)
