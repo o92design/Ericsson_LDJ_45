@@ -3298,9 +3298,9 @@ MonoBehaviour:
   m_EventText: {fileID: 606277947}
   m_gameSteps: {fileID: 801656887}
   m_flowStep: 0
-  m_inputWaitingTime: 4.15
+  m_inputWaitingTime: 2
   m_canInput: 0
-  m_InputTimeAfterAfterFadeInAnimation: 4
+  m_InputTimeAfterAfterFadeInAnimation: 2
   m_bigBangTextDelay: 15
 --- !u!114 &801656887
 MonoBehaviour:
