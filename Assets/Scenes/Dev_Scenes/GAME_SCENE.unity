@@ -1649,7 +1649,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.227125, y: 0.6794166}
   m_AnchorMax: {x: 0.7692188, y: 0.9722222}
-  m_AnchoredPosition: {x: -0.0025024414, y: 0.000061035156}
+  m_AnchoredPosition: {x: -0.0025024414, y: 0}
   m_SizeDelta: {x: 0, y: -0.000030518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &321495627
@@ -3844,7 +3844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rotationalSpeed: 10
-  m_accelerationMultiplier: 5
+  m_accelerationMultiplier: 1
 --- !u!54 &880087786
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3874,6 +3874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_connected: []
+  m_missile: {fileID: 0}
 --- !u!114 &880087788
 MonoBehaviour:
   m_ObjectHideFlags: 0

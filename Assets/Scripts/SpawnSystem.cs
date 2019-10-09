@@ -63,14 +63,17 @@ public class SpawnSystem : MonoBehaviour
     {
         for (int i = 0; i < Random.Range(m_minNumberOfStrössel, m_maxNumberOfStrössel); i++)
         {
-            SpawnObject(strössel, new Vector3(this.transform.position.x + Random.Range(-5,5), this.transform.position.y + Random.Range(-5, 5), this.transform.position.z + Random.Range(-5, 5)));
+             SpawnObject(strössel, new Vector3(this.transform.position.x + Random.Range(-5,5), this.transform.position.y + Random.Range(-5, 5), this.transform.position.z + Random.Range(-5, 5)));
         }
     }
 
     public void SpawnObject(GameObject objectToSPawn, Vector3 pos)
     {
         GameObject Object = Instantiate(objectToSPawn,pos, objectToSPawn.gameObject.transform.rotation);
-
+        if (objectToSPawn == m_debugSpawnHuman)
+        {
+            Object.GetComponent<Objekt_Skit>().objtype = 3;
+        }
         float scalemodifier = Random.Range(0.1f, 2);
         Object.transform.rotation = Quaternion.Euler(new Vector3(Object.transform.eulerAngles.x, Random.Range(-180.0f, 180.0f), Object.transform.eulerAngles.z));
         Object.transform.localScale = new Vector3(Object.transform.localScale.x * scalemodifier, Object.transform.localScale.y * scalemodifier, Object.transform.localScale.z * scalemodifier);

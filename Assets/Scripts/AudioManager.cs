@@ -61,6 +61,12 @@ public class AudioManager : MonoBehaviour
         m_audioSource.PlayOneShot(m_boom);
     }
 
+    public void PlayBoomLow()
+    {
+        m_audioSource.PlayOneShot(m_boom, 0.5f);
+    }
+
+
     public void PlayBang()
     {
         m_audioSource.PlayOneShot(m_bang);
